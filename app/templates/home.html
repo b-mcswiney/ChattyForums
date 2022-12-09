@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class = "mx-5 mt-5 text-white">
+    <!-- Personalised message for each user -->
+    <h1>Welcome to the chatty forums, {{ current_user.name }}</h1>
+
+    <h3>Your posts</h1>
+    <!-- Have the user's own posts displayed to them first -->
+    <div id="accordion" class ="text-dark">
+        {% for p in post %}
+        <div class="mb-1 card">
+            <a class="nav-link lead" href="/posts/{{ p.id }}">{{ p.title }}</a>
+            <div class="ml-2 mb-2">
+                <a class="font-italic"> posted by: {{ current_user.name }}</a> | <a>Topic: {{ p.topic }}</a>
+            </div>
+        </div>         
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class = " d-flex justify-content-center align-items-center">
+    <div class = "mx-5 mt-5 w-50">
+        <a href="/posts" class="btn btn-dark text-white">Back to posts</a>
+        <!-- Card to show the main part of the post-->
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">
+                    {{ post.title }}
+                </h1>
+
+                <!-- Search through all users and once we find the matching one display that -->
+                {% for user in users %}
+                    {% if user.id == post.user_id %}
+                        <div class="card-subtitle border-bottom font-italic">
+                            posted by: {{user.name}}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Show the body of the post -->
+                <div class="card-text">
+                    {{ post.body }}
+                </div>
+            </div>
+        </div>
+        <!-- Form to add a comment to a post -->
+        <form method="post">
+            {{ add_comment.hidden_tag() }}
+            <div class="form-group">
+                {{ add_comment.body(class="form-control", placeholder="Write a comment!", autocomplete="off") }}
+                <input type="submit" class="btn btn-primary bg-dark" value="Add Comment">
+            </div>
+        </form>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- Post every comment attached to this post -->
+        {% for comment in comments %}
+        <div class="card mt-3">
+            <meta name="csrf-token" content="{{ csrf_token() }}">
+            <!-- Find the user that posted the current comment being displayed and display them next to the comment -->
+            {% for user in users %}
+                {% if user.id == comment.user_id %}
+                    <h4 class="card-title"> {{user.name}}</h4>
+                {% endif %}
+            {% endfor %}
+			<div class="card-text">
+				{{ comment.body }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a class="like" id="{{ comment.id }}">
+					<i class="bi bi-hand-thumbs-up-fill"></i><span id="commentNumb">{{ comment.liked }}</span></a>
+			</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

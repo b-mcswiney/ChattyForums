@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class = "mx-5 mt-5 text-white">
+    <h1>Posts!</h1>
+    <!-- Shows every post in database -->
+    <div class ="text-dark">
+        {% for p in post %}
+        <div class="mb-1 card">
+            <a class="nav-link lead" href="/posts/{{ p.id }}">{{ p.title }}</a>
+            <!-- Search through every user to find the user that posted the current post -->
+            {% for user in users %}
+                {% if user.id == p.user_id %}
+                <div class="ml-2 mb-2">
+                    <a class="font-italic"> posted by: {{user.name}}</a> | <a>Topic: {{ p.topic }}</a>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>         
+        {% endfor %}
+    </div>
+    
+</div>
+{% endblock %}

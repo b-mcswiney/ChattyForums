@@ -1,0 +1,34 @@
+{% extends "auth_layout.html" %}
+{% block content %}
+
+<!-- Form to allow the user to create an account of the Chatty Forums -->
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card bg-dark" style="width: 25rem">
+        <form class="d-flex justify-content-center align-items-center" method="POST">
+            {{ create_acc.hidden_tag() }}
+            <div class="form-group bg-dark text-white">
+                <div class="form-group px-5 pt-2">
+                    <label>Username</label>
+                    {{ create_acc.username(class="form-control", placeholder="Enter Username", autocomplete="off") }}
+                </div>
+                <div class="form-group px-5">
+                    <label>Password</label>
+                    {{ create_acc.password(class="form-control", placeholder="Enter Password", autocomplete="off") }}
+                </div>
+                <div class="form-group px-5">
+                    <label>Confirm Password</label>
+                    {{ create_acc.check_password(class="form-control", placeholder="Enter Password", autocomplete="off") }}
+                </div>
+                <div class="form-group px-5">
+                    <label>Email</label>
+                    {{ create_acc.email(class="form-control", placeholder="Enter Password", autocomplete="off") }}
+                </div>
+                <div class="pl-5 pb-5">
+                    <p class="font-italic">Already have an account? <a href="/"> go to login!</a></p>
+                    <input type="submit" class="btn btn-primary bg-dark" value="Create Account!">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

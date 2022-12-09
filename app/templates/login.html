@@ -1,0 +1,26 @@
+{% extends "auth_layout.html" %}
+{% block content %}
+
+<!--Form to allow existing users to login to their account  -->
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card bg-dark" style="width: 25rem">
+        <form class="d-flex justify-content-center align-items-center" method="POST">
+            {{ login.hidden_tag() }}
+            <div class="form-group text-white">
+                <div class="form-group px-5 pt-5">
+                    <label>Username</label>
+                    {{ login.username(class="form-control", placeholder="Enter Username", autocomplete="off") }}
+                </div>
+                <div class="form-group px-5">
+                    <label>Password</label>
+                    {{ login.password(class="form-control", placeholder="Enter Password", autocomplete="off") }}
+                </div>
+                <div class="pl-5 pb-5">
+                    <p class="font-italic">Don't have an account? <a href="/create_account">Make one here!</a></p>
+                    <input type="submit" class="btn btn-primary bg-dark" value="Login!">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
